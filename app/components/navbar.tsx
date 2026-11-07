@@ -37,7 +37,7 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
-  // The rule under the links rests on the current page and slides to the hovered link.
+  // The pill behind the links rests on the current page and slides to the hovered link.
   useEffect(() => {
     const measure = () => {
       const el = target === null ? null : linkRefs.current[target];
@@ -59,7 +59,7 @@ export function Navbar() {
   return (
     <>
       <header className="nav">
-        <nav aria-label="Main" className="container nav__bar">
+        <nav aria-label="Main" className="nav__bar">
           <Link href="/" className="wordmark" aria-label="Techisar home">
             <LogoMark />
             <span>Techisar</span>
@@ -71,11 +71,12 @@ export function Navbar() {
             onMouseLeave={() => setHovered(null)}
             onBlur={() => setHovered(null)}
           >
-            <span
+            <li
               aria-hidden="true"
               className="nav__marker"
               style={{
-                transform: `translateX(${marker.x}px) scaleX(${marker.w})`,
+                width: marker.w,
+                transform: `translateX(${marker.x}px)`,
                 opacity: marker.visible ? 1 : 0,
               }}
             />
@@ -99,7 +100,7 @@ export function Navbar() {
 
           <div className="nav__end">
             <ThemeToggle />
-            <Link href="/contact" className="btn btn--nav">
+            <Link href="/contact" className="btn btn--primary btn--nav">
               Contact us
             </Link>
             <button
@@ -140,10 +141,16 @@ export function Navbar() {
   );
 }
 
-function LogoMark() {
+export function LogoMark() {
   return (
     <svg viewBox="0 0 32 32" className="wordmark__mark" aria-hidden="true" fill="none">
-      <rect width="32" height="32" rx="7" className="wordmark__frame" />
+      <defs>
+        <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#7c4dff" />
+          <stop offset="1" stopColor="#22d3ee" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" fill="url(#logo-grad)" />
       <path d="M8 9.5h16M16 9.5V24" className="wordmark__t" />
     </svg>
   );
@@ -166,13 +173,13 @@ function ThemeToggle() {
   };
 
   // Both icons are always rendered and swapped in CSS, so the server and client
-  // markup match regardless of the saved sheet.
+  // markup match regardless of the saved theme.
   return (
     <button type="button" onClick={toggle} aria-label="Toggle color theme" className="icon-btn theme-toggle">
-      <svg viewBox="0 0 24 24" className="theme-toggle__moon" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+      <svg viewBox="0 0 24 24" className="theme-toggle__moon" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
       </svg>
-      <svg viewBox="0 0 24 24" className="theme-toggle__sun" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+      <svg viewBox="0 0 24 24" className="theme-toggle__sun" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
       </svg>

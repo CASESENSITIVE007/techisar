@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { Doodle } from "./doodle";
+import { Icon } from "./icons";
 import { Reveal } from "./reveal";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
@@ -7,57 +9,79 @@ const v = (n: number) => ({ "--i": n }) as CSSProperties;
 const ITEMS = [
   {
     title: "Product design",
+    icon: "design",
+    tone: "violet",
     body: "Research, flows and interfaces that make sense the first time someone opens them.",
   },
   {
     title: "Web engineering",
+    icon: "code",
+    tone: "cyan",
     body: "React and Next.js products that load fast, stay accessible and are easy to keep building on.",
   },
   {
     title: "Mobile apps",
+    icon: "phone",
+    tone: "pink",
     body: "iOS and Android from one React Native codebase, with the polish of a native product.",
   },
   {
     title: "AI integration",
+    icon: "ai",
+    tone: "sun",
     body: "Assistants, search and automation grounded in your own content, with guardrails and review.",
   },
   {
     title: "Design systems",
+    icon: "layers",
+    tone: "green",
     body: "Tokens and components that keep every screen consistent, in light and dark.",
   },
   {
     title: "Launch and growth",
+    icon: "rocket",
+    tone: "blue",
     body: "Release, measure and iterate once real users arrive, or hand over cleanly.",
   },
 ];
 
-export function Expertise() {
+export function Expertise({ standalone = false }: { standalone?: boolean }) {
   return (
-    <section className="section section--tight">
-      <div className="container aside-grid">
-        <Reveal className="aside-grid__head">
+    <section className="section">
+      <span className="glow glow--cyan" style={{ top: "20%", left: "-14%" }} aria-hidden="true" />
+      <div className="container">
+        <Reveal className="head">
+          <Doodle name="spark" color="sun" className="head__doodle head__doodle--sm" />
           <h2 data-reveal>Core expertise</h2>
           <p className="lead" data-reveal style={v(1)}>
             Six disciplines in one team, so nothing gets lost between design and code.
           </p>
-          <Link href="/services" className="text-link" data-reveal style={v(2)}>
-            Explore services
-          </Link>
         </Reveal>
 
-        <ul className="rows">
-          {ITEMS.map((item) => (
-            <li key={item.title}>
-              <Reveal className="row">
-                <span className="rule" aria-hidden="true" />
-                <h3 data-reveal>{item.title}</h3>
-                <p data-reveal style={v(1)}>
-                  {item.body}
-                </p>
-              </Reveal>
-            </li>
+        <Reveal className="features">
+          {ITEMS.map((item, n) => (
+            <article
+              key={item.title}
+              className="feature spot"
+              data-reveal
+              style={{ "--i": n, "--tone": `var(--${item.tone})` } as CSSProperties}
+            >
+              <span className="tile">
+                <Icon name={item.icon} />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
           ))}
-        </ul>
+        </Reveal>
+
+        {!standalone && (
+          <Reveal className="section-foot">
+            <Link href="/services" className="btn" data-reveal>
+              Explore services
+            </Link>
+          </Reveal>
+        )}
       </div>
     </section>
   );

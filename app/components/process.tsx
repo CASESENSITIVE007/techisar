@@ -2,70 +2,61 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { Doodle } from "./doodle";
+import { Icon } from "./icons";
 import { Reveal } from "./reveal";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
-// Weeks each stage takes on the ruler; the last runs on, so it is drawn at two.
 const STEPS = [
   {
     when: "Week 1",
-    mark: "1",
-    weeks: 1,
+    icon: "search",
     title: "Discover",
     body: "We sit with your team, map the users and the risks, and agree what the first release must prove.",
-    chips: "Workshop, user map, release scope",
+    chips: ["Workshop", "User map", "Release scope"],
   },
   {
     when: "Weeks 2-3",
-    mark: "2-3",
-    weeks: 2,
+    icon: "design",
     title: "Design",
     body: "Flows, then screens, then a clickable prototype you can put in front of real people before a line of code.",
-    chips: "Flows, interface, prototype",
+    chips: ["Flows", "Interface", "Prototype"],
   },
   {
     when: "Weeks 4-8",
-    mark: "4-8",
-    weeks: 5,
+    icon: "code",
     title: "Build",
     body: "Two-week sprints with a working build at the end of each. You see progress in a live environment, not a slide.",
-    chips: "Sprints, staging, QA",
+    chips: ["Sprints", "Staging", "QA"],
   },
   {
     when: "Week 9 on",
-    mark: "9 on",
-    weeks: 2,
+    icon: "rocket",
     title: "Launch & grow",
     body: "We ship, watch the numbers and keep improving, or hand everything over cleanly if you prefer to take it from here.",
-    chips: "Release, analytics, handover",
+    chips: ["Release", "Analytics", "Handover"],
   },
 ];
 
-const TOTAL = STEPS.reduce((sum, s) => sum + s.weeks, 0);
-
-export function Process() {
+export function Process({ standalone = false }: { standalone?: boolean }) {
+  const listRef = useRef<HTMLOListElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
   const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [reached, setReached] = useState(0);
 
-  // Scroll-linked: a reading line 60% down the viewport walks the stage rows, and
-  // the week ruler fills to the same point, each row owning its weeks on the ruler.
+  // A reading line 60% down the screen fills the rail and lights each step it passes.
   useEffect(() => {
     let raf = 0;
     const update = () => {
       raf = 0;
+      const list = listRef.current;
+      if (!list) return;
       const line = window.innerHeight * 0.6;
-      let weeks = 0;
-      let count = 0;
-      stepRefs.current.forEach((el, n) => {
-        if (!el) return;
-        const box = el.getBoundingClientRect();
-        const t = Math.min(Math.max((line - box.top) / box.height, 0), 1);
-        weeks += STEPS[n].weeks * t;
-        if (t > 0) count = n + 1;
-      });
-      fillRef.current?.style.setProperty("transform", `scaleX(${weeks / TOTAL})`);
+      const box = list.getBoundingClientRect();
+      const t = Math.min(Math.max((line - box.top) / box.height, 0), 1);
+      fillRef.current?.style.setProperty("transform", `scaleY(${t})`);
+      const count = stepRefs.current.filter((el) => el && el.getBoundingClientRect().top < line).length;
       setReached((prev) => (prev === count ? prev : count));
     };
     const onScroll = () => {
@@ -82,37 +73,27 @@ export function Process() {
   }, []);
 
   return (
-    <section className="section band">
+    <section className="section">
       <div className="container">
-        <Reveal className="head head--split">
-          <h2 data-reveal>From idea to launch in weeks.</h2>
-          <div className="head__side" data-reveal style={v(1)}>
-            <p className="lead">
+        <div className="band">
+          <span className="glow glow--violet" style={{ top: "-20%", left: "-10%" }} aria-hidden="true" />
+          <span className="glow glow--cyan" style={{ bottom: "-20%", right: "-10%" }} aria-hidden="true" />
+          <Doodle name="zigzag" color="pink" className="band__doodle band__doodle--a" />
+          <Doodle name="star" color="sun" className="band__doodle band__doodle--b" />
+
+          <Reveal className="head">
+            <h2 data-reveal>
+              From idea to launch <span className="grad">in weeks.</span>
+            </h2>
+            <p className="lead" data-reveal style={v(1)}>
               A simple rhythm, the same on every project, so you always know what happens next.
             </p>
-            <Link href="/process" className="btn">
-              See our full process
-            </Link>
-          </div>
-        </Reveal>
+          </Reveal>
 
-        <div className="process">
-          <div className="ruler" aria-hidden="true">
-            <span className="ruler__caption">Weeks</span>
-            <div className="ruler__scale" style={{ gridTemplateColumns: STEPS.map((s) => `${s.weeks}fr`).join(" ") }}>
-              {STEPS.map((s) => (
-                <span key={s.when} className="ruler__seg">
-                  <span className="ruler__long">{s.when}</span>
-                  <span className="ruler__short">{s.mark}</span>
-                </span>
-              ))}
-            </div>
-            <span className="ruler__track">
-              <span ref={fillRef} className="ruler__fill" />
+          <ol ref={listRef} className="timeline">
+            <span className="timeline__rail" aria-hidden="true">
+              <span ref={fillRef} className="timeline__fill" />
             </span>
-          </div>
-
-          <ol className="stages">
             {STEPS.map((step, n) => (
               <li
                 key={step.title}
@@ -122,18 +103,34 @@ export function Process() {
                 className="stage"
                 data-active={n < reached}
               >
-                <span className="stage__no">{n + 1}</span>
-                <div>
-                  <h3 className="stage__title">{step.title}</h3>
-                  <p className="stage__when">{step.when}</p>
-                </div>
-                <div>
-                  <p>{step.body}</p>
-                  <p className="note stage__gets">{step.chips}</p>
-                </div>
+                <span className="stage__node">
+                  <Icon name={step.icon} />
+                </span>
+                <Reveal className="stage__body">
+                  <div className="stage__card spot" data-reveal>
+                    <div className="stage__head">
+                      <h3>{step.title}</h3>
+                      <span className="tag">{step.when}</span>
+                    </div>
+                    <p>{step.body}</p>
+                    <ul className="stage__chips">
+                      {step.chips.map((chip) => (
+                        <li key={chip}>{chip}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
               </li>
             ))}
           </ol>
+
+          {!standalone && (
+            <Reveal className="section-foot">
+              <Link href="/process" className="btn" data-reveal>
+                See our full process
+              </Link>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

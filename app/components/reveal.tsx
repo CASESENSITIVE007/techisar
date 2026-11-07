@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
-// Sets data-inview on the element the first time it scrolls into view. CSS in
-// globals.css keys every entrance off that attribute, under a .js class, so the
-// animations stay declarative, nothing re-renders, and nothing hides without script.
-function useReveal<T extends HTMLElement>() {
+// Sets data-inview on the element the first time it scrolls into view. CSS keys
+// every entrance off that attribute, under a .js class, so nothing hides without script.
+export function useReveal<T extends HTMLElement | SVGSVGElement>() {
   const ref = useRef<T>(null);
   useEffect(() => {
     const el = ref.current;
@@ -18,7 +17,7 @@ function useReveal<T extends HTMLElement>() {
           io.disconnect();
         }
       },
-      { rootMargin: "0px 0px -10% 0px" },
+      { rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -43,7 +42,7 @@ export function Reveal({
   );
 }
 
-// A sheet in the work register: the whole row is the link.
+// A project card: the whole card is the link.
 export function WorkCard({
   href,
   children,
@@ -59,6 +58,23 @@ export function WorkCard({
       {children}
     </Link>
   );
+}
+
+// Feeds the pointer position to any .spot card, which lights up under the cursor.
+export function PointerGlow() {
+  useEffect(() => {
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const onMove = (e: PointerEvent) => {
+      const card = (e.target as Element | null)?.closest?.<HTMLElement>(".spot");
+      if (!card) return;
+      const box = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - box.left}px`);
+      card.style.setProperty("--my", `${e.clientY - box.top}px`);
+    };
+    document.addEventListener("pointermove", onMove, { passive: true });
+    return () => document.removeEventListener("pointermove", onMove);
+  }, []);
+  return null;
 }
 
 export function CountUp({

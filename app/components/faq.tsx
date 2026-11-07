@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { Doodle } from "./doodle";
 import { FaqAccordion, type FaqItem } from "./faq-accordion";
 import { Reveal } from "./reveal";
 
@@ -40,18 +41,20 @@ const jsonLd = {
 
 export function Faq() {
   return (
-    <section className="section section--wide section--close">
+    <section className="section">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <div className="container aside-grid">
-        <Reveal className="aside-grid__head">
+      <span className="glow glow--pink" style={{ top: "10%", left: "-12%" }} aria-hidden="true" />
+      <div className="container faq-grid">
+        <Reveal className="faq-grid__side">
           <h2 data-reveal>Questions, answered.</h2>
           <div className="ask" data-reveal style={v(1)}>
+            <Doodle name="spark" color="sun" className="ask__doodle" />
             <p className="ask__q">Still have questions?</p>
-            <p className="note">We usually reply within a day.</p>
-            <Link href="/contact" className="btn">
+            <p>We usually reply within a day.</p>
+            <Link href="/contact" className="btn btn--primary">
               Talk to us
             </Link>
           </div>

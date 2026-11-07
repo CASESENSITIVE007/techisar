@@ -1,43 +1,12 @@
-# Design: Techisar
+# Techisar design system: Midnight violet
 
-The locked system. Every Hallmark run reads this first and pages share it. Change it on purpose; the file is the rule.
+Chosen by the owner after rejecting the plain Blueprint and Console looks. The site should feel rich, colourful and premium, never text on flat panels.
 
-## System
-- Genre: modern-minimal
-- Shape of the first page: Map / Diagram
-- Theme: Console
-- Axes: dark/grotesk-sans/chromatic-amber, posture: restrained
-- Colourways: graphite (dark, the default) and paper (light), switched by the nav toggle through `data-theme`
-
-## Tokens
-`app/tokens.css` is the source of truth; `app/base.css` holds the Floor's base rules. Faces load through `next/font` in `app/layout.tsx`:
-- Display and body: Host Grotesk, heads at 500, sentence case
-- Measured: Atkinson Hyperlegible Mono, only for values, weeks and figures
-- The name is always written "Techisar", with a capital T
-
-## Colour meaning
-- Amber: the primary action, the current step, the logo mark
-- Cool blue: data and measured values, charts, schedules
-- Green and red: status only
-
-## Surfaces
-- Hairline panels with a 10px radius, 6px on controls; panels that touch share one surface with 1px seams
-- Three steps of ground, no shadows, glows, gradients or blur
-
-## Controls
-- One amber primary per screen beside 1px outlined secondaries, 48px
-- Links underline and turn amber on hover
-
-## Motion
-- Owner asked for rich motion, so it goes past the theme's still default, within the Floor
-- Lines draw once, `[data-reveal]` rises 8px once, under `.js` so nothing hides without script
-- The week bar fills with scroll; the hero signals are the only loop, with a Pause button
-- `transform` and `opacity` only, no bounce, every entrance at rest under reduced motion
-
-## Page rules
-- No labels above headings, no tracked capitals, no middle-dot strings, no drawn browser or phone frames
-- Pages share theme, type and accent and differ only in shape
-- Screens of products are drawn as hairline panels inside a `data-slot`, ready for real screenshots
-
-## Exports
-None yet. Say "export the tokens" for another format.
+- **Colour:** deep midnight ground, violet to cyan gradients, with pink, sun and green as accents. Values live in `app/tokens.css`. The light theme uses the same colours on lilac white.
+- **Type:** Bricolage Grotesque for headings, Plus Jakarta Sans for text, JetBrains Mono for code and tags, Caveat for handwritten notes.
+- **Background:** the `.sky` layer in `app/layout.tsx` runs behind every page. Sections add `.glow` blobs.
+- **Doodles:** use `<Doodle>` from `app/components/doodle.tsx`. They draw themselves on scroll. Every section should have at least one.
+- **Cards:** glass surfaces, 24 to 36px corners, at least 26px padding on phones and 36px on desktop. Add `.spot` for the cursor light.
+- **Spacing:** sections use `--section` (128px on desktop), section heads use `--head-gap`. Do not go tighter.
+- **Motion:** use `data-reveal` inside `<Reveal>` for entrances. Hover lifts use the `translate` property so they do not fight the entrance animation. Every loop must stop under reduced motion.
+- **Brand:** always "Techisar" with a capital T. Do not bring back the "NEW" badge.

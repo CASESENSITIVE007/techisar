@@ -1,14 +1,17 @@
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { Doodle } from "./doodle";
 import { CountUp, Reveal, WorkCard } from "./reveal";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
-export function RecentWork() {
+export function RecentWork({ standalone = false }: { standalone?: boolean }) {
   return (
     <section className="section">
+      <span className="glow glow--pink" style={{ top: "12%", right: "-12%" }} aria-hidden="true" />
       <div className="container">
-        <Reveal className="head head--split">
+        <Reveal className="head">
+          <Doodle name="squiggle" color="pink" className="head__doodle" />
           <h2 data-reveal>Recent product thinking</h2>
           <p className="lead" data-reveal style={v(1)}>
             Concepts from our studio: how we think about real problems before a single line of
@@ -16,68 +19,70 @@ export function RecentWork() {
           </p>
         </Reveal>
 
-        <ul className="register">
-          <li>
-            <WorkCard href="/work" className="sheet sheet--lead">
-              <SheetText name="Ledgerly" description="Finance dashboard for startup founders" />
-              <figure
-                className="sheet__fig"
-                data-slot="ledgerly"
-                data-kind="product"
-                data-alt="The Ledgerly dashboard: cash position, a monthly chart and recent transactions"
-              >
-                <Ledgerly />
-              </figure>
-            </WorkCard>
+        <ul className="works">
+          <li className="works__lead">
+            <Project tone="violet" lead name="Ledgerly" description="Finance dashboard for startup founders">
+              <Ledgerly />
+            </Project>
           </li>
           <li>
-            <WorkCard href="/work" className="sheet sheet--stack">
-              <SheetText name="Wayfare" description="Trip planning app, iOS and Android" />
-              <figure
-                className="sheet__fig"
-                data-slot="wayfare"
-                data-kind="product"
-                data-alt="The Wayfare app: the week ahead, focus time and the next two items"
-              >
-                <Wayfare />
-              </figure>
-            </WorkCard>
+            <Project tone="cyan" name="Wayfare" description="Trip planning app, iOS and Android">
+              <Wayfare />
+            </Project>
           </li>
           <li>
-            <WorkCard href="/work" className="sheet sheet--stack">
-              <SheetText name="Pulse" description="Clinic scheduling for small practices" />
-              <figure
-                className="sheet__fig"
-                data-slot="pulse"
-                data-kind="product"
-                data-alt="The Pulse calendar for November with booked days marked"
-              >
-                <Pulse />
-              </figure>
-            </WorkCard>
+            <Project tone="pink" name="Pulse" description="Clinic scheduling for small practices">
+              <Pulse />
+            </Project>
           </li>
         </ul>
 
-        <Reveal className="section-foot">
-          <Link href="/work" className="btn" data-reveal>
-            See all work
-          </Link>
-          <p className="note" data-reveal style={v(1)}>
-            Full case studies, outcomes and process notes on the Work page.
-          </p>
-        </Reveal>
+        {!standalone && (
+          <Reveal className="section-foot">
+            <Link href="/work" className="btn" data-reveal>
+              See all work
+            </Link>
+          </Reveal>
+        )}
       </div>
     </section>
   );
 }
 
-function SheetText({ name, description }: { name: string; description: string }) {
+function Project({
+  tone,
+  lead = false,
+  name,
+  description,
+  children,
+}: {
+  tone: string;
+  lead?: boolean;
+  name: string;
+  description: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="sheet__text">
-      <h3 className="sheet__name">{name}</h3>
-      <p className="note">concept</p>
-      <p className="sheet__line">{description}</p>
-    </div>
+    <WorkCard href="/work" className={`work work--${tone} spot ${lead ? "work--lead" : ""}`}>
+      <div className="work__text" data-reveal>
+        <span className="tag">Concept</span>
+        <h3 className="work__name">{name}</h3>
+        <p>{description}</p>
+        <span className="work__more">View project</span>
+      </div>
+      <div className="work__art" data-reveal style={v(1)}>
+        <span className="work__shape work__shape--a" aria-hidden="true" />
+        <span className="work__shape work__shape--b" aria-hidden="true" />
+        <div className="window">
+          <div className="window__bar">
+            <i />
+            <i />
+            <i />
+          </div>
+          {children}
+        </div>
+      </div>
+    </WorkCard>
   );
 }
 
@@ -94,7 +99,7 @@ function Ledgerly() {
               <CountUp to={1.28} decimals={2} prefix="$" suffix="M" />
             </p>
           </div>
-          <p className="mock__num">+8.1%</p>
+          <p className="mock__up">+8.1%</p>
         </div>
         <div className="bars" aria-hidden="true">
           {BARS.map((h, n) => (
@@ -120,24 +125,20 @@ function Ledgerly() {
 
 function Wayfare() {
   return (
-    <div className="mock mock--stack">
-      <div>
-        <p className="mock__label">Good morning</p>
-        <p className="mock__title">Your week</p>
-        <p className="mock__label mock__gap">Focus time</p>
-        <p className="mock__figure">14h 20m</p>
+    <div className="mock">
+      <p className="mock__label">Good morning</p>
+      <p className="mock__title">Your week</p>
+      <p className="mock__label mock__gap">Focus time</p>
+      <p className="mock__figure">14h 20m</p>
+      <div className="bars bars--small" aria-hidden="true">
+        {[40, 70, 50, 85, 60, 95, 55].map((h, n) => (
+          <span key={n} className="bar" style={{ height: `${h}%`, "--i": n } as CSSProperties} />
+        ))}
       </div>
-      <div>
-        <div className="bars bars--small" aria-hidden="true">
-          {[40, 70, 50, 85, 60, 95, 55].map((h, n) => (
-            <span key={n} className="bar" style={{ height: `${h}%`, "--i": n } as CSSProperties} />
-          ))}
-        </div>
-        <ul className="mock__rows">
-          <li>Design review</li>
-          <li>Ship v1.2</li>
-        </ul>
-      </div>
+      <ul className="mock__rows">
+        <li>Design review</li>
+        <li>Ship v1.2</li>
+      </ul>
     </div>
   );
 }

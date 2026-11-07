@@ -1,41 +1,35 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Atkinson_Hyperlegible_Mono, Host_Grotesk } from "next/font/google";
 import { Navbar } from "./components/navbar";
 import { SiteFooter } from "./components/site-footer";
 import "./globals.css";
 
-// Display face for headings: optical sizing sharpens it at large sizes.
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz"],
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const host = Host_Grotesk({
+  variable: "--font-host",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const atkinsonMono = Atkinson_Hyperlegible_Mono({
+  variable: "--font-atkinson-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Techisar",
-  description: "Techisar — digital product studio",
+  description: "Techisar designs, builds and launches apps, websites and AI products.",
 };
 
-// Applies the saved (or system) theme before first paint to avoid a flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+// Applies the saved sheet before first paint, and marks that scripting is on so
+// entrance states only ever hide content a script will show again.
+const themeScript = `(function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t)r.setAttribute("data-theme",t)}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      data-theme="light"
+      data-theme="dark"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${jakarta.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${host.variable} ${atkinsonMono.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

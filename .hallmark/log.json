@@ -1,0 +1,42 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "Map / Diagram",
+  "theme": "console",
+  "hero": "Ledge",
+  "nav": "edge-aligned",
+  "footer": "mast",
+  "imagery": "the product built",
+  "photos": [],
+  "signature": "delivery system scheduled to scale in weeks",
+  "waived": [
+   "44c",
+   "71",
+   "77"
+  ],
+  "prompt": "software product studio redesign",
+  "date": "2026-11-06"
+ },
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "Map / Diagram",
+  "theme": "blueprint",
+  "hero": "Ledge",
+  "nav": "edge-aligned",
+  "footer": "mast",
+  "imagery": "the product built",
+  "photos": [],
+  "signature": "delivery system drawn with a week ruler",
+  "waived": [
+   "23",
+   "44c",
+   "77"
+  ],
+  "prompt": "digital product studio redesign",
+  "date": "2026-11-06"
+ }
+]

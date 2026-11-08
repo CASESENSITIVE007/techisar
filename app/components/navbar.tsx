@@ -146,8 +146,8 @@ export function LogoMark() {
     <svg viewBox="0 0 32 32" className="wordmark__mark" aria-hidden="true" fill="none">
       <defs>
         <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#7c4dff" />
-          <stop offset="1" stopColor="#22d3ee" />
+          <stop offset="0" stopColor="#ef4452" />
+          <stop offset="1" stopColor="#b3121d" />
         </linearGradient>
       </defs>
       <rect width="32" height="32" rx="9" fill="url(#logo-grad)" />

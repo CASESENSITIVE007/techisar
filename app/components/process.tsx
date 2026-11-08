@@ -76,12 +76,13 @@ export function Process({ standalone = false }: { standalone?: boolean }) {
     <section className="section">
       <div className="container">
         <div className="band">
-          <span className="glow glow--violet" style={{ top: "-20%", left: "-10%" }} aria-hidden="true" />
-          <span className="glow glow--cyan" style={{ bottom: "-20%", right: "-10%" }} aria-hidden="true" />
-          <Doodle name="zigzag" color="pink" className="band__doodle band__doodle--a" />
-          <Doodle name="star" color="sun" className="band__doodle band__doodle--b" />
+          <span className="glow glow--red" style={{ top: "-20%", left: "-10%" }} aria-hidden="true" />
+          <span className="glow glow--mist" style={{ bottom: "-20%", right: "-10%" }} aria-hidden="true" />
+          <Doodle name="zigzag" color="ash" className="band__doodle band__doodle--a" />
+          <Doodle name="star" color="silver" className="band__doodle band__doodle--b" />
 
           <Reveal className="head">
+            <p className="label" data-reveal>How we work</p>
             <h2 data-reveal>
               From idea to launch <span className="grad">in weeks.</span>
             </h2>

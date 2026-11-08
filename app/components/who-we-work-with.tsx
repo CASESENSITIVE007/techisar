@@ -1,5 +1,4 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Doodle } from "./doodle";
 import { GrowthIllo, LayersIllo, RocketIllo } from "./illustrations";
 import { Reveal } from "./reveal";
 
@@ -18,10 +17,10 @@ const AUDIENCES: { title: string; body: string; art: ReactNode }[] = [
 export function WhoWeWorkWith() {
   return (
     <section className="section">
-      <span className="glow glow--violet" style={{ bottom: "0", right: "-10%" }} aria-hidden="true" />
+      <span className="glow glow--red" style={{ bottom: "0", right: "-10%" }} aria-hidden="true" />
       <div className="container">
         <Reveal className="head">
-          <Doodle name="loop" color="cyan" className="head__doodle" />
+          <p className="label" data-reveal>Clients</p>
           <h2 data-reveal>Who we work with</h2>
           <p className="lead" data-reveal style={v(1)}>
             One team takes your idea from sketch to a launched product, then stays to help it grow.

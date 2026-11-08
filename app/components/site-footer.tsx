@@ -32,9 +32,9 @@ export function SiteFooter() {
         <Reveal className="cta">
           <span className="cta__orb cta__orb--a" aria-hidden="true" />
           <span className="cta__orb cta__orb--b" aria-hidden="true" />
-          <Doodle name="loop" color="sun" className="cta__doodle cta__doodle--a" />
-          <Doodle name="star" color="cyan" className="cta__doodle cta__doodle--b" />
-          <Doodle name="squiggle" color="pink" className="cta__doodle cta__doodle--c" />
+          <Doodle name="loop" color="silver" className="cta__doodle cta__doodle--a" />
+          <Doodle name="star" color="mist" className="cta__doodle cta__doodle--b" />
+          <Doodle name="squiggle" color="ash" className="cta__doodle cta__doodle--c" />
           <h2 data-reveal>Have a product in mind?</h2>
           <p className="lead" data-reveal style={v(1)}>
             Tell us what you want to build. You will hear back within one working day, with questions or

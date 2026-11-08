@@ -46,12 +46,13 @@ export function Faq() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <span className="glow glow--pink" style={{ top: "10%", left: "-12%" }} aria-hidden="true" />
+      <span className="glow glow--ash" style={{ top: "10%", left: "-12%" }} aria-hidden="true" />
       <div className="container faq-grid">
         <Reveal className="faq-grid__side">
+          <p className="label" data-reveal>FAQ</p>
           <h2 data-reveal>Questions, answered.</h2>
           <div className="ask" data-reveal style={v(1)}>
-            <Doodle name="spark" color="sun" className="ask__doodle" />
+            <Doodle name="spark" color="silver" className="ask__doodle" />
             <p className="ask__q">Still have questions?</p>
             <p>We usually reply within a day.</p>
             <Link href="/contact" className="btn btn--primary">

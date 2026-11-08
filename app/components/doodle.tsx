@@ -24,12 +24,12 @@ export function Doodle({
   name,
   className = "",
   style,
-  color = "violet",
+  color = "red",
 }: {
   name: DoodleName;
   className?: string;
   style?: CSSProperties;
-  color?: "violet" | "cyan" | "pink" | "sun" | "green";
+  color?: "red" | "mist" | "ash" | "silver" | "green";
 }) {
   const ref = useReveal<SVGSVGElement>();
   const { box, paths } = DOODLES[name];

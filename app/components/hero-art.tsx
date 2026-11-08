@@ -75,12 +75,12 @@ export function HeroArt() {
                 <svg viewBox="0 0 300 110" className="dash__chart" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="art-area" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stopColor="#7c4dff" stopOpacity="0.55" />
-                      <stop offset="1" stopColor="#7c4dff" stopOpacity="0" />
+                      <stop offset="0" stopColor="#e63946" stopOpacity="0.32" />
+                      <stop offset="1" stopColor="#e63946" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="art-line" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0" stopColor="#9b7fff" />
-                      <stop offset="1" stopColor="#22d3ee" />
+                      <stop offset="0" stopColor="#ff5a64" />
+                      <stop offset="1" stopColor="#d62839" />
                     </linearGradient>
                   </defs>
                   <path d={`${CHART} V110 H0 Z`} fill="url(#art-area)" />
@@ -149,8 +149,8 @@ export function HeroArt() {
         </div>
       </div>
 
-      <Doodle name="star" color="sun" className="art__star" />
-      <Doodle name="spark" color="pink" className="art__spark" />
+      <Doodle name="star" color="silver" className="art__star" />
+      <Doodle name="spark" color="ash" className="art__spark" />
     </div>
   );
 }

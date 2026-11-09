@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Icon } from "./icons";
 import { Reveal } from "./reveal";
+import { Doodle } from "./doodle";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
@@ -9,25 +10,25 @@ const ITEMS = [
   {
     title: "Product design",
     icon: "design",
-    tone: "red",
+    tone: "violet",
     body: "Research, flows and interfaces that make sense the first time someone opens them.",
   },
   {
     title: "Web engineering",
     icon: "code",
-    tone: "mist",
+    tone: "cyan",
     body: "React and Next.js products that load fast, stay accessible and are easy to keep building on.",
   },
   {
     title: "Mobile apps",
     icon: "phone",
-    tone: "ash",
+    tone: "pink",
     body: "iOS and Android from one React Native codebase, with the polish of a native product.",
   },
   {
     title: "AI integration",
     icon: "ai",
-    tone: "silver",
+    tone: "sun",
     body: "Assistants, search and automation grounded in your own content, with guardrails and review.",
   },
   {
@@ -39,7 +40,7 @@ const ITEMS = [
   {
     title: "Launch and growth",
     icon: "rocket",
-    tone: "steel",
+    tone: "blue",
     body: "Release, measure and iterate once real users arrive, or hand over cleanly.",
   },
 ];
@@ -47,10 +48,10 @@ const ITEMS = [
 export function Expertise({ standalone = false }: { standalone?: boolean }) {
   return (
     <section className="section">
-      <span className="glow glow--mist" style={{ top: "20%", left: "-14%" }} aria-hidden="true" />
+      <span className="glow glow--cyan" style={{ top: "20%", left: "-14%" }} aria-hidden="true" />
       <div className="container">
         <Reveal className="head">
-          <p className="label" data-reveal>Capabilities</p>
+          <Doodle name="spark" color="sun" className="head__doodle head__doodle--sm" />
           <h2 data-reveal>Core expertise</h2>
           <p className="lead" data-reveal style={v(1)}>
             Six disciplines in one team, so nothing gets lost between design and code.

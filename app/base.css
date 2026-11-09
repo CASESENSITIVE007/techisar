@@ -11,7 +11,7 @@ body {
 
 html {
   background: var(--bg);
-  scrollbar-color: var(--red) var(--bg);
+  scrollbar-color: var(--violet) var(--bg);
   scroll-padding-top: 120px;
 }
 
@@ -25,11 +25,11 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--red) 40%, transparent);
+  background: color-mix(in oklab, var(--violet) 40%, transparent);
 }
 
 :focus-visible {
-  outline: 2px solid var(--mist);
+  outline: 2px solid var(--cyan);
   outline-offset: 3px;
 }
 
@@ -43,35 +43,25 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   line-height: 1.08;
   overflow-wrap: break-word;
   text-wrap: balance;
 }
 
-/* Page and section titles are wide capitals, like a product launch poster. */
-h1,
-h2 {
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-}
-
 h1 {
   font-size: var(--text-display);
-  line-height: 1.04;
+  line-height: 1.02;
 }
 
 h2 {
   font-size: var(--text-section);
-  line-height: 1.1;
 }
 
 h3 {
   font-size: var(--text-title);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 p {

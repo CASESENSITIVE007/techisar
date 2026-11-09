@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Caveat, JetBrains_Mono, Plus_Jakarta_Sans, Unbounded } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Navbar } from "./components/navbar";
 import { PointerGlow } from "./components/reveal";
 import { SiteFooter } from "./components/site-footer";
 import "./globals.css";
 
-const unbounded = Unbounded({ variable: "--font-unbounded", subsets: ["latin"] });
+const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"] });
 const jakarta = Plus_Jakarta_Sans({ variable: "--font-jakarta", subsets: ["latin"] });
 const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"] });
 const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"], weight: ["600", "700"] });
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${unbounded.variable} ${jakarta.variable} ${jetbrains.variable} ${caveat.variable} h-full`}
+      className={`${bricolage.variable} ${jakarta.variable} ${jetbrains.variable} ${caveat.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

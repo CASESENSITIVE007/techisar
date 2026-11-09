@@ -1,8 +1,8 @@
-# Techisar design system: Black, red & silver
+# Techisar design system: Midnight violet
 
 Chosen by the owner after rejecting the plain Blueprint and Console looks. The site should feel rich, colourful and premium, never text on flat panels.
 
-- **Colour:** black ground, white text, red (`--red`) as the one accent, silver greys (`--silver`, `--steel`, `--mist`, `--ash`) in support. No other hues; green is only for the small Live status. Primary buttons are red with white text in both themes (`--grad-btn`, `--on-btn`). Values live in `app/tokens.css`.
+- **Colour:** deep midnight ground, violet to cyan gradients, with pink, sun and green as accents. Values live in `app/tokens.css`. The light theme uses the same colours on lilac white.
 - **Type:** Bricolage Grotesque for headings, Plus Jakarta Sans for text, JetBrains Mono for code and tags, Caveat for handwritten notes.
 - **Background:** the `.sky` layer in `app/layout.tsx` runs behind every page. Sections add `.glow` blobs.
 - **Doodles:** use `<Doodle>` from `app/components/doodle.tsx`. They draw themselves on scroll. Every section should have at least one.

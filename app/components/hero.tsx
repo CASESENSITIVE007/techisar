@@ -1,12 +1,18 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { HeroOrb } from "./hero-orb";
+import { Doodle } from "./doodle";
+import { HeroArt } from "./hero-art";
 import { Icon } from "./icons";
 import { Reveal } from "./reveal";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
-const BUILDS = ["Websites", "Mobile apps", "AI features", "Design systems"];
+const BUILDS = [
+  { label: "Websites", icon: "code" },
+  { label: "Mobile apps", icon: "phone" },
+  { label: "AI features", icon: "ai" },
+  { label: "Design systems", icon: "layers" },
+];
 
 const STACK = ["React", "Next.js", "TypeScript", "React Native", "Expo", "Figma", "iOS", "Android"];
 
@@ -14,21 +20,22 @@ export function Hero() {
   return (
     <>
       <section className="hero">
+        <Doodle name="zigzag" color="cyan" className="hero__doodle hero__doodle--a" />
+        <Doodle name="ring" color="pink" className="hero__doodle hero__doodle--b" />
         <div className="container hero__grid">
           <Reveal className="hero__copy">
-            <p className="ticks" data-reveal>
-              <span>Product studio</span>
-              <span>Apps · Web · AI</span>
-              <span>Est. 2026</span>
-            </p>
-            <h1 data-reveal style={v(1)}>
-              Apps, websites and <span className="grad">AI products.</span>
+            <h1 data-reveal>
+              Apps, websites and{" "}
+              <span className="hl">
+                <span className="grad">AI products.</span>
+                <Doodle name="underline" color="cyan" className="hl__line" />
+              </span>
             </h1>
-            <p className="lead" data-reveal style={v(2)}>
+            <p className="lead" data-reveal style={v(1)}>
               Techisar is a tech startup. We design, build and launch digital products for businesses,
               from first sketch to live in weeks.
             </p>
-            <div className="actions" data-reveal style={v(3)}>
+            <div className="actions" data-reveal style={v(2)}>
               <Link href="/work" className="btn btn--primary">
                 Check our projects
               </Link>
@@ -36,11 +43,12 @@ export function Hero() {
                 Talk to us
               </Link>
             </div>
-            <ul className="chips" data-reveal style={v(4)}>
-              {BUILDS.map((label) => (
-                <li key={label}>
+            <ul className="chips" data-reveal style={v(3)}>
+              {BUILDS.map((item) => (
+                <li key={item.label}>
                   <Link href="/services" className="chip">
-                    {label}
+                    <Icon name={item.icon} />
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -48,7 +56,13 @@ export function Hero() {
           </Reveal>
 
           <div className="hero__art">
-            <HeroOrb />
+            <HeroArt />
+            <p className="hand hero__note">
+              live in weeks,
+              <br />
+              not quarters!
+              <Doodle name="arrowDown" color="sun" className="hero__arrow" />
+            </p>
           </div>
         </div>
       </section>

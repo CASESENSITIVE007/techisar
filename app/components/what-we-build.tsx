@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { Icon } from "./icons";
 import { Reveal } from "./reveal";
+import { Doodle } from "./doodle";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
@@ -87,10 +88,10 @@ export function WhatWeBuild() {
       onPointerEnter={() => (hold.current.hover = true)}
       onPointerLeave={() => (hold.current.hover = false)}
     >
-      <span className="glow glow--mist" style={{ top: "30%", right: "-14%" }} aria-hidden="true" />
+      <span className="glow glow--cyan" style={{ top: "30%", right: "-14%" }} aria-hidden="true" />
       <div className="container">
         <Reveal className="head">
-          <p className="label" data-reveal>Products</p>
+          <Doodle name="brackets" color="violet" className="head__doodle head__doodle--sm" />
           <h2 data-reveal>What we build</h2>
         </Reveal>
 
@@ -263,7 +264,7 @@ function AiMock() {
 }
 
 function DesignMock() {
-  const swatches = ["#0a0a0b", "#2a2b2e", "#9ea2a8", "#c9ccd1", "#e63946", "#b3121d"];
+  const swatches = ["#7c4dff", "#4463f5", "#22d3ee", "#34d399", "#fbbf24", "#f472b6"];
   return (
     <div className="mock mock--system">
       <div>

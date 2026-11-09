@@ -1,16 +1,17 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { CountUp, Reveal, WorkCard } from "./reveal";
+import { Doodle } from "./doodle";
 
 const v = (n: number) => ({ "--i": n }) as CSSProperties;
 
 export function RecentWork({ standalone = false }: { standalone?: boolean }) {
   return (
     <section className="section">
-      <span className="glow glow--ash" style={{ top: "12%", right: "-12%" }} aria-hidden="true" />
+      <span className="glow glow--pink" style={{ top: "12%", right: "-12%" }} aria-hidden="true" />
       <div className="container">
         <Reveal className="head">
-          <p className="label" data-reveal>Selected work</p>
+          <Doodle name="squiggle" color="pink" className="head__doodle" />
           <h2 data-reveal>Recent product thinking</h2>
           <p className="lead" data-reveal style={v(1)}>
             Concepts from our studio: how we think about real problems before a single line of
@@ -20,17 +21,17 @@ export function RecentWork({ standalone = false }: { standalone?: boolean }) {
 
         <ul className="works">
           <li className="works__lead">
-            <Project tone="red" lead name="Ledgerly" description="Finance dashboard for startup founders">
+            <Project tone="violet" lead name="Ledgerly" description="Finance dashboard for startup founders">
               <Ledgerly />
             </Project>
           </li>
           <li>
-            <Project tone="mist" name="Wayfare" description="Trip planning app, iOS and Android">
+            <Project tone="cyan" name="Wayfare" description="Trip planning app, iOS and Android">
               <Wayfare />
             </Project>
           </li>
           <li>
-            <Project tone="ash" name="Pulse" description="Clinic scheduling for small practices">
+            <Project tone="pink" name="Pulse" description="Clinic scheduling for small practices">
               <Pulse />
             </Project>
           </li>
